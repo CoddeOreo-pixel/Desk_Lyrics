@@ -1,0 +1,120 @@
+[data-theme="apple-music"] {
+  --bg-primary: #1c1c1e;
+  --bg-secondary: #2c2c2e;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.3);
+  --accent: #fc3c44;
+  --accent-glow: none;
+  --lyric-active-size: 1.3;
+  --panel-bg: rgba(44, 44, 46, 0.95);
+  --panel-border: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="apple-music"] #app {
+  background: linear-gradient(180deg, #2c2c2e 0%, #1c1c1e 100%);
+  transition: background 1s ease;
+}
+
+[data-theme="apple-music"] .lyric-line {
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: color 0.5s ease, font-weight 0.5s ease, background 0.5s ease;
+  color: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+[data-theme="apple-music"] .lyric-line.active {
+  color: #ffffff;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  text-shadow: none;
+}
+
+[data-theme="apple-music"] .lyric-line.near {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="apple-music"] .lyric-translation {
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+[data-theme="apple-music"] .song-info {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 24px 16px;
+}
+
+[data-theme="apple-music"] .song-name {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+}
+
+[data-theme="apple-music"] .song-artist {
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+[data-theme="apple-music"] .cover-container {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="apple-music"] .ctrl-btn {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="apple-music"] .ctrl-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="apple-music"] .ctrl-btn-main {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="apple-music"] .ctrl-btn-main:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  transform: scale(1.05);
+}
+
+[data-theme="apple-music"] .toolbar-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="apple-music"] .toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+[data-theme="apple-music"] .status-bar {
+  background: rgba(44, 44, 46, 0.8);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="apple-music"] .theme-panel,
+[data-theme="apple-music"] .font-panel,
+[data-theme="apple-music"] .offset-panel,
+[data-theme="apple-music"] .manual-panel {
+  background: rgba(44, 44, 46, 0.95);
+  border-color: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+[data-theme="apple-music"] .controls {
+  background: linear-gradient(transparent, rgba(28, 28, 30, 0.8));
+  padding-top: 24px;
+}

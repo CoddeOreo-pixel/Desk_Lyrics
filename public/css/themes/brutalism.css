@@ -1,0 +1,156 @@
+[data-theme="brutalism"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #999999;
+  --accent: #ff0040;
+  --accent-glow: none;
+  --lyric-active-size: 1.8;
+  --panel-bg: #ffffff;
+  --panel-border: #000000;
+}
+
+[data-theme="brutalism"] #app {
+  background: #ffffff;
+  border: 4px solid #000000;
+}
+
+[data-theme="brutalism"] .lyric-line {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #cccccc;
+  transition: color 0.15s ease, background 0.15s ease, outline 0.15s ease;
+  outline: 3px solid transparent;
+  outline-offset: -3px;
+}
+
+[data-theme="brutalism"] .lyric-line.active {
+  color: #ffffff;
+  background: #ff0040;
+  outline-color: #000000;
+  text-shadow: none;
+}
+
+[data-theme="brutalism"] .lyric-line.near {
+  color: #666666;
+}
+
+[data-theme="brutalism"] .lyric-translation {
+  font-family: 'Courier New', monospace;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+[data-theme="brutalism"] .song-info {
+  background: #ffff00;
+  border-bottom: 4px solid #000000;
+  padding: 16px 24px;
+}
+
+[data-theme="brutalism"] .song-name {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+[data-theme="brutalism"] .song-artist {
+  font-family: 'Courier New', monospace;
+  color: #000000;
+}
+
+[data-theme="brutalism"] .cover-container {
+  border-radius: 0;
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0 #000000;
+}
+
+[data-theme="brutalism"] .ctrl-btn {
+  border: 3px solid #000000;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000000;
+}
+
+[data-theme="brutalism"] .ctrl-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+[data-theme="brutalism"] .ctrl-btn-main {
+  background: #ff0040 !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+[data-theme="brutalism"] .ctrl-btn-main:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000000;
+}
+
+[data-theme="brutalism"] .toolbar-btn {
+  border-radius: 0;
+  border: 2px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  backdrop-filter: none;
+}
+
+[data-theme="brutalism"] .toolbar-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+[data-theme="brutalism"] .status-bar {
+  border-radius: 0;
+  border: 2px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  backdrop-filter: none;
+}
+
+[data-theme="brutalism"] .theme-panel,
+[data-theme="brutalism"] .font-panel,
+[data-theme="brutalism"] .offset-panel,
+[data-theme="brutalism"] .manual-panel {
+  border-radius: 0;
+  border: 3px solid #000000;
+  background: #ffffff;
+  backdrop-filter: none;
+}
+
+[data-theme="brutalism"] .theme-panel h3,
+[data-theme="brutalism"] .font-panel h3,
+[data-theme="brutalism"] .offset-panel h3,
+[data-theme="brutalism"] .manual-panel h3 {
+  color: #000000;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  text-transform: uppercase;
+}
+
+[data-theme="brutalism"] .theme-option {
+  border: 2px solid #000000;
+  border-radius: 0;
+  color: #000000;
+}
+
+[data-theme="brutalism"] .theme-option.active {
+  border-color: #ff0040;
+  background: #ffff00;
+}
+
+[data-theme="brutalism"] .search-box input {
+  border: 2px solid #000000;
+  border-radius: 0;
+  background: #ffffff;
+  color: #000000;
+}
+
+[data-theme="brutalism"] .search-box button {
+  border-radius: 0;
+  border: 2px solid #000000;
+  background: #ff0040;
+}

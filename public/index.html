@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark-immersive">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Desk_Lyrics</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes/dark-immersive.css">
+  <link rel="stylesheet" href="/css/themes/brutalism.css">
+  <link rel="stylesheet" href="/css/themes/apple-music.css">
+</head>
+<body>
+  <div id="app">
+    <div id="connection-status" class="status-bar">
+      <span class="status-dot"></span>
+      <span class="status-text">连接中...</span>
+    </div>
+
+    <div id="song-info" class="song-info hidden">
+      <div class="cover-container">
+        <img id="cover-img" src="" alt="" class="cover-img">
+      </div>
+      <div class="song-meta">
+        <h1 id="song-name" class="song-name"></h1>
+        <p id="song-artist" class="song-artist"></p>
+      </div>
+    </div>
+
+    <div id="lyrics-container" class="lyrics-container">
+      <div id="lyrics-placeholder" class="lyrics-placeholder">
+        <div class="placeholder-icon">♪</div>
+        <p>等待播放...</p>
+      </div>
+      <div id="lyrics-body" class="lyrics-body"></div>
+    </div>
+
+    <div id="controls" class="controls hidden">
+      <button id="btn-prev" class="ctrl-btn" title="上一首">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-play" class="ctrl-btn ctrl-btn-main" title="播放/暂停">
+        <svg id="icon-play" viewBox="0 0 24 24" width="28" height="28"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        <svg id="icon-pause" viewBox="0 0 24 24" width="28" height="28" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-next" class="ctrl-btn" title="下一首">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="currentColor"/></svg>
+      </button>
+    </div>
+
+    <div id="toolbar" class="toolbar">
+      <button id="btn-immersive" class="toolbar-btn" title="沉浸模式">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v3H5z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-theme" class="toolbar-btn" title="切换主题">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-1 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-fullscreen" class="toolbar-btn" title="全屏">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-font-size" class="toolbar-btn" title="字体大小">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v7h3v-7h3V9H3v3z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-offset" class="toolbar-btn" title="歌词偏移">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
+      </button>
+    </div>
+
+    <div id="theme-panel" class="theme-panel hidden">
+      <h3>选择主题</h3>
+      <div class="theme-options">
+        <button class="theme-option" data-theme="dark-immersive">
+          <span class="theme-preview dark-preview"></span>
+          <span>暗黑沉浸</span>
+        </button>
+        <button class="theme-option" data-theme="brutalism">
+          <span class="theme-preview brutal-preview"></span>
+          <span>野兽主义</span>
+        </button>
+        <button class="theme-option" data-theme="apple-music">
+          <span class="theme-preview apple-preview"></span>
+          <span>Apple Music</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="font-panel" class="font-panel hidden">
+      <h3>字体大小</h3>
+      <input type="range" id="font-slider" min="12" max="32" value="18" step="1">
+      <span id="font-value">18px</span>
+    </div>
+
+    <div id="offset-panel" class="offset-panel hidden">
+      <h3>歌词偏移</h3>
+      <div class="offset-controls">
+        <button id="offset-minus" class="offset-btn">-0.5s</button>
+        <span id="offset-value">0.0s</span>
+        <button id="offset-plus" class="offset-btn">+0.5s</button>
+        <button id="offset-reset" class="offset-btn">重置</button>
+      </div>
+    </div>
+
+    <div id="manual-panel" class="manual-panel hidden">
+      <h3>手动模式</h3>
+      <p class="manual-hint">未检测到网易云音乐客户端，请输入歌曲ID或搜索歌曲</p>
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="搜索歌曲..." autocomplete="off">
+        <button id="search-btn">搜索</button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </div>
+
+  <script src="/js/ws-client.js"></script>
+  <script src="/js/lyrics-renderer.js"></script>
+  <script src="/js/theme-manager.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
