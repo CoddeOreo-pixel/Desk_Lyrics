@@ -111,7 +111,7 @@
         showManualMode()
       }
       if (data.song) onSongChange(data.song)
-      if (data.lyrics?.length > 0) renderer.setLyrics(data.lyrics)
+      if (data.lyrics && data.lyrics.length > 0) renderer.setLyrics(data.lyrics)
       if (data.isPlaying !== undefined) updatePlayState(data.isPlaying)
       if (data.currentTime) {
         localCurrentTime = data.currentTime
@@ -302,10 +302,14 @@
   }
 
   function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {})
+    var el = document.documentElement
+    var isFull = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement)
+    if (!isFull) {
+      var rq = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen
+      if (rq) rq.call(el)
     } else {
-      document.exitFullscreen().catch(() => {})
+      var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen
+      if (ex) ex.call(document)
     }
   }
 
