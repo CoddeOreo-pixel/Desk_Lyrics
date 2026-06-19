@@ -43,13 +43,19 @@ app.get('/api/search', async (req, res) => {
 
 function getLocalIP() {
   const interfaces = os.networkInterfaces()
+  const skip = ['VMware', 'VirtualBox', 'WSL', 'Hyper-V', 'vEthernet', '本地连接', 'Bluetooth', '蓝牙']
+  let candidates = []
   for (const name of Object.keys(interfaces)) {
+    const isVirtual = skip.some(k => name.includes(k))
     for (const iface of interfaces[name]) {
       if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address
+        candidates.push({ name, address: iface.address, isVirtual })
       }
     }
   }
+  const real = candidates.find(c => !c.isVirtual)
+  if (real) return real.address
+  if (candidates.length > 0) return candidates[0].address
   return '127.0.0.1'
 }
 

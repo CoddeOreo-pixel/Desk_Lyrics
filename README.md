@@ -1,102 +1,108 @@
-# Desk Lyrics 🎵
+# Desk Lyrics
 
-局域网实时歌词投射器——在 PC 端网易云音乐播放歌曲，平板（或任何设备）打开网页即可实时显示歌词。
+A real-time lyrics projector for your local network — play music on your PC's NetEase Cloud Music client, and any device on the same network can display synchronized lyrics in a browser.
 
-## 功能
+## Features
 
-- **实时歌词同步**：自动检测网易云音乐 PC 客户端正在播放的歌曲，实时获取并推送歌词
-- **双语歌词**：支持原文 + 翻译对照显示
-- **播放控制**：上一首 / 播放暂停 / 下一首，通过 Windows 媒体键控制 NCM 客户端
-- **多主题**：暗黑沉浸风、野兽主义、Apple Music 风格，一键切换
-- **沉浸模式**：隐藏所有 UI 元素，只留歌词
-- **歌词偏移**：手动调整歌词时间偏移，解决歌词不同步问题
-- **字体大小**：可调节歌词字体大小
-- **全屏模式**：浏览器全屏显示
-- **二维码**：启动时自动生成局域网二维码，平板扫码即开
+- **Real-time lyrics sync** — Automatically detects the playing song from NetEase Cloud Music (NCM) PC client and pushes lyrics in real time
+- **Bilingual lyrics** — Original lyrics + translation displayed side by side
+- **Playback control** — Previous / Play-Pause / Next via Windows media keys
+- **Multiple themes** — Dark Immersive, Brutalism, Apple Music style, switch with one tap
+- **Immersive mode** — Hide all UI elements, lyrics only
+- **Lyrics offset** — Manually adjust timing offset to fix out-of-sync lyrics
+- **Font size** — Adjustable lyrics font size
+- **Fullscreen** — Browser fullscreen mode
+- **QR code** — Auto-generates a LAN QR code on startup, scan to open on your tablet
 
-## 前置要求
+## Prerequisites
 
-- **操作系统**：Windows（通过 PowerShell 获取 NCM 窗口标题和发送媒体键）
-- **Node.js**：v16+
-- **网易云音乐 PC 客户端**：运行中
+- **OS**: Windows (uses PowerShell to read NCM window title and send media keys)
+- **Node.js**: v16+
+- **NetEase Cloud Music PC client**: Running
 
-## 安装
+## Install
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/CoddeOreo-pixel/Desk_Lyrics.git
 cd Desk_Lyrics
 npm install
 ```
 
-## 使用
+## Usage
 
-### 1. 启动服务
+### 1. Start the server
 
 ```bash
 npm start
 ```
 
-终端会显示：
+The terminal will display:
 
 ```
 ╔══════════════════════════════════════╗
-║       Desk_Lyrics 歌词投射器          ║
+║       Desk_Lyrics Lyrics Projector   ║
 ╠══════════════════════════════════════╣
-║  本机访问: http://localhost:3210
-║  局域网:   http://192.168.x.x:3210
+║  Local:   http://localhost:3210
+║  Network: http://192.168.x.x:3210
 ╠══════════════════════════════════════╣
-║  扫描二维码在平板上打开:              ║
+║  Scan QR code to open on tablet:     ║
 ╚══════════════════════════════════════╝
 ```
 
-### 2. 打开网易云音乐
+### 2. Open NetEase Cloud Music
 
-在 PC 上打开网易云音乐客户端并播放歌曲。服务会自动检测正在播放的歌曲。
+Launch the NCM client on your PC and start playing a song. The server will automatically detect the current track.
 
-### 3. 打开网页
+### 3. Open the web page
 
-在平板（或任何同局域网设备）的浏览器中访问终端显示的局域网地址，或扫描二维码。
+On your tablet (or any device on the same network), visit the LAN address shown in the terminal, or scan the QR code.
 
-## 项目结构
+> **Firewall note**: If other devices can't connect, you may need to add a Windows Firewall inbound rule for TCP port 3210.
+
+## Project Structure
 
 ```
 Desk_Lyrics/
 ├── server/
-│   ├── index.js              # Express + WebSocket 服务器入口
-│   ├── ws-handler.js         # WebSocket 消息协议处理
+│   ├── index.js              # Express + WebSocket server entry
+│   ├── ws-handler.js         # WebSocket message protocol handler
 │   └── services/
-│       ├── ncm-local.js      # NCM 客户端检测、窗口标题解析、媒体键控制
-│       ├── ncm-cloud.js      # 网易云音乐 API（歌词/歌曲详情/搜索）
-│       ├── lyrics-parser.js  # LRC 歌词解析器
-│       ├── player-state.js   # 播放状态管理（轮询 + 事件驱动）
-│       └── crypto.js         # API 加密模块
+│       ├── ncm-local.js      # NCM client detection, window title parsing, media key control
+│       ├── ncm-cloud.js      # NetEase Cloud Music API (lyrics/song details/search)
+│       ├── lyrics-parser.js  # LRC lyrics parser
+│       ├── player-state.js   # Playback state management (polling + event-driven)
+│       └── crypto.js         # API encryption module
 ├── public/
-│   ├── index.html            # 前端页面
+│   ├── index.html            # Frontend page
 │   ├── css/
-│   │   ├── base.css          # 基础样式 + 沉浸模式
+│   │   ├── base.css          # Base styles + immersive mode
 │   │   └── themes/
-│   │       ├── dark-immersive.css  # 暗黑沉浸风
-│   │       ├── brutalism.css       # 野兽主义
-│   │       └── apple-music.css     # Apple Music 风
+│   │       ├── dark-immersive.css  # Dark Immersive theme
+│   │       ├── brutalism.css       # Brutalism theme
+│   │       └── apple-music.css     # Apple Music theme
 │   └── js/
-│       ├── app.js            # 前端主逻辑
-│       ├── lyrics-renderer.js # 歌词渲染引擎
-│       ├── ws-client.js      # WebSocket 客户端（自动重连）
-│       └── theme-manager.js  # 主题管理
+│       ├── app.js            # Frontend main logic
+│       ├── lyrics-renderer.js # Lyrics rendering engine
+│       ├── ws-client.js      # WebSocket client (auto-reconnect)
+│       └── theme-manager.js  # Theme manager
 ├── package.json
-└── PRD.md                    # 产品需求文档
+└── PRD.md                    # Product requirements document
 ```
 
-## 工作原理
+## How It Works
 
-1. **歌曲检测**：每秒通过 PowerShell 获取网易云音乐窗口标题（格式：`歌曲名 - 艺术家`），解析出当前播放的歌曲
-2. **歌曲匹配**：通过 NeteaseCloudMusicApi 搜索匹配歌曲 ID，获取歌词和封面
-3. **实时同步**：服务端维护播放进度，通过 WebSocket 推送给前端；前端用 `requestAnimationFrame` 本地计时 + 服务端校准，实现低延迟歌词滚动
-4. **播放控制**：通过 Windows `keybd_event` API 发送媒体键（播放/暂停/上一首/下一首），控制 NCM 客户端
+1. **Song detection** — Every second, PowerShell reads the NCM window title (format: `Song - Artist`) to identify the current track
+2. **Song matching** — Uses NeteaseCloudMusicApi to search and match the song ID, then fetches lyrics and cover art
+3. **Real-time sync** — The server maintains playback progress and pushes updates via WebSocket; the frontend uses `requestAnimationFrame` for local timing + server calibration for low-latency lyrics scrolling
+4. **Playback control** — Sends media keys (play/pause/prev/next) via Windows `keybd_event` API to control the NCM client
 
-## 技术栈
+## Tech Stack
 
-- **后端**：Node.js + Express + WebSocket (ws)
-- **前端**：原生 HTML/CSS/JS，零框架依赖
-- **API**：NeteaseCloudMusicApi（歌词、歌曲详情、搜索）
-- **歌词渲染**：CSS `transform: translateY()` GPU 合成层滚动 + 二分查找当前行
+- **Backend**: Node.js + Express + WebSocket (ws)
+- **Frontend**: Vanilla HTML/CSS/JS, zero framework dependencies
+- **API**: NeteaseCloudMusicApi (lyrics, song details, search)
+- **Lyrics rendering**: CSS `transform: translateY()` GPU compositing scroll + binary search for current line
+
+## License
+
+MIT
